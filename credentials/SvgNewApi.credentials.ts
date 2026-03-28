@@ -1,5 +1,6 @@
 import type {
   IAuthenticateGeneric,
+  ICredentialTestRequest,
   ICredentialType,
   INodeProperties,
 } from 'n8n-workflow';
@@ -27,6 +28,14 @@ export class SvgNewApi implements ICredentialType {
       headers: {
         Authorization: '=Bearer {{$credentials.apiKey}}',
       },
+    },
+  };
+
+  test: ICredentialTestRequest = {
+    request: {
+      baseURL: 'https://svg.new',
+      url: '/api/vectorizations',
+      method: 'GET',
     },
   };
 }
