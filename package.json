@@ -1,0 +1,41 @@
+{
+  "name": "n8n-nodes-svgnew",
+  "version": "0.1.0",
+  "description": "n8n community node to convert images to SVG vectors using svg.new",
+  "license": "MIT",
+  "keywords": [
+    "n8n-community-node-package"
+  ],
+  "author": {
+    "name": "svg.new",
+    "email": "contact@svg.new"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/svgnew/n8n.git"
+  },
+  "scripts": {
+    "build": "tsc && cp -r nodes/SvgNew/*.json dist/nodes/SvgNew/ 2>/dev/null; cp -r icons dist/ 2>/dev/null; true",
+    "lint": "echo ok",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/SvgNewApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/SvgNew/SvgNew.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "typescript": "^5.8.0"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  }
+}
