@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-svgnew",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "n8n community node to convert images to SVG vectors using svg.new",
   "license": "MIT",
   "keywords": [
