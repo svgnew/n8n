@@ -1,11 +1,18 @@
 {
-  "node": "n8n-nodes-svgnew",
-  "nodeVersion": "1.0",
-  "codexVersion": "1.0",
-  "categories": ["Miscellaneous"],
-  "resources": {
-    "primaryDocumentation": [
-      { "url": "https://svg.new/developers" }
-    ]
-  }
+	"node": "n8n-nodes-svgnew",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Utility", "Marketing & Content"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://github.com/svgnew/n8n#credentials"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://github.com/svgnew/n8n#readme"
+			}
+		]
+	}
 }

@@ -1,41 +1,60 @@
 {
-  "name": "n8n-nodes-svgnew",
-  "version": "0.1.2",
-  "description": "n8n community node to convert images to SVG vectors using svg.new",
-  "license": "MIT",
-  "keywords": [
-    "n8n-community-node-package"
-  ],
-  "author": {
-    "name": "svg.new",
-    "email": "contact@svg.new"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/svgnew/n8n.git"
-  },
-  "scripts": {
-    "build": "tsc && cp -r nodes/SvgNew/*.json dist/nodes/SvgNew/ 2>/dev/null; cp -r icons dist/ 2>/dev/null; true",
-    "lint": "echo ok",
-    "prepublishOnly": "npm run build"
-  },
-  "files": [
-    "dist"
-  ],
-  "n8n": {
-    "n8nNodesApiVersion": 1,
-    "credentials": [
-      "dist/credentials/SvgNewApi.credentials.js"
-    ],
-    "nodes": [
-      "dist/nodes/SvgNew/SvgNew.node.js"
-    ]
-  },
-  "devDependencies": {
-    "@types/node": "^25.5.0",
-    "typescript": "^5.8.0"
-  },
-  "peerDependencies": {
-    "n8n-workflow": "*"
-  }
+	"name": "n8n-nodes-svgnew",
+	"version": "0.2.0",
+	"description": "n8n community node for SVG.new: remove background and vectorize images, then recolor or simplify the SVG",
+	"license": "MIT",
+	"homepage": "https://svg.new/n8n",
+	"keywords": [
+		"n8n-community-node-package",
+		"n8n",
+		"svg",
+		"vectorize",
+		"remove background",
+		"image to svg"
+	],
+	"author": {
+		"name": "svg.new",
+		"email": "contact@svg.new"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/svgnew/n8n.git"
+	},
+	"bugs": {
+		"url": "https://github.com/svgnew/n8n/issues"
+	},
+	"scripts": {
+		"build": "n8n-node build",
+		"build:watch": "tsc --watch",
+		"dev": "n8n-node dev",
+		"lint": "n8n-node lint",
+		"lint:fix": "n8n-node lint --fix",
+		"test": "n8n-node build && node --test \"test/*.test.mjs\"",
+		"release": "n8n-node release",
+		"prepublishOnly": "n8n-node prerelease"
+	},
+	"files": [
+		"dist",
+		"!dist/tsconfig.tsbuildinfo"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"strict": true,
+		"credentials": [
+			"dist/credentials/SvgNewApi.credentials.js"
+		],
+		"nodes": [
+			"dist/nodes/SvgNew/SvgNew.node.js"
+		]
+	},
+	"devDependencies": {
+		"@n8n/node-cli": "0.52.5",
+		"eslint": "9.39.4",
+		"prettier": "3.8.3",
+		"release-it": "20.2.0",
+		"typescript": "5.9.3"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	}
 }
