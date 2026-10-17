@@ -1,24 +1,64 @@
+# Publishes n8n-nodes-svgnew to npm when a version tag is pushed (v0.2.0 or 0.2.0).
+#
+# n8n only verifies community nodes published from GitHub Actions with an npm provenance
+# statement (required since May 1 2026):
+# https://docs.n8n.io/connect/create-nodes/deploy-your-node/submit-community-nodes
+#
+# Authentication, in order of preference:
+#   1. npm trusted publishing (OIDC, no secret). On npmjs.com, under the package's
+#      Settings > Trusted Publisher, add GitHub Actions with owner `svgnew`, repository `n8n`,
+#      workflow `publish.yml`, and allow `npm publish`. npm then also adds provenance itself.
+#      Needs npm 11.5.1+ and Node 22.14+, so Node 24 is used below.
+#   2. Fallback: an npm granular access token in the repository secret NPM_TOKEN.
+# The npm CLI tries OIDC first and falls back to the token.
+
 name: Publish to npm
 
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*.*.*'
+      - '*.*.*'
+
+permissions:
+  contents: read
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      # Mints the OIDC token for trusted publishing and for signing the provenance statement.
       id-token: write
+      contents: read
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
         with:
-          node-version: 22
-          registry-url: https://registry.npmjs.org
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false # never cache in release builds
+
+      - name: Check the tag matches package.json
+        run: |
+          version="$(node -p 'require("./package.json").version')"
+          tag="${GITHUB_REF_NAME#v}"
+          if [ "$tag" != "$version" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match package.json version $version"
+            exit 1
+          fi
+
       - run: npm ci
-      - run: npm run build
-      - run: npm publish --provenance --access public
+
+      - run: npm test
+
+      # In GitHub Actions, `n8n-node release` runs lint and build, then `npm publish` with
+      # NPM_CONFIG_PROVENANCE=true.
+      - name: Publish with provenance
+        run: |
+          if [ -n "$NPM_TOKEN" ]; then
+            npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
+          fi
+          npm run release
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
