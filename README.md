@@ -29,7 +29,7 @@ After n8n verifies the node, it also appears in the nodes panel of n8n Cloud and
 | **Recolor SVG** | Replaces colors in an SVG. Each shape filled with a "From" color gets its "To" color. | 0 |
 | **Simplify SVG Colors** | Reduces an SVG to at most a set number of colors (1 to 256) by merging similar colors. | 0 |
 
-Credits come from your SVG.new account. A free account gets 3 credits a day. Paid plans are listed at [svg.new/pricing](https://svg.new/pricing).
+Credits come from your SVG.new account. A free account gets 1 credit a day. Paid plans are listed at [svg.new/pricing](https://svg.new/pricing).
 
 The node can also be used as a tool by the n8n AI Agent node.
 

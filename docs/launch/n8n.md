@@ -124,7 +124,7 @@ SVG.new removes backgrounds from images and converts PNG, JPEG and WebP images t
 
 Images can come from a binary field, a public URL or a data URL. Results come back as SVG text and as binary files. The node works with the AI Agent node as a tool.
 
-Authentication is an SVG.new API key. Vectorizing and removing backgrounds use SVG.new credits; recoloring and simplifying are free. A free account gets 3 credits a day.
+Authentication is an SVG.new API key. Vectorizing and removing backgrounds use SVG.new credits; recoloring and simplifying are free. A free account gets 1 credit a day.
 ```
 
 **Category**
@@ -160,7 +160,7 @@ contact@svg.new
 **How to test (notes for the reviewer)**
 
 ```
-Create a free account at https://svg.new and an API key under "API keys" at https://svg.new/account. The free plan gives 3 credits a day. The credential test lists past vectorizations and uses no credits. Recolor SVG and Simplify SVG Colors use no credits; Vectorize Image uses 1 credit and Remove Background uses 2 (1 if given an existing SVG). If you need more credits to test, email contact@svg.new.
+Create a free account at https://svg.new and an API key under "API keys" at https://svg.new/account. The free plan gives 1 credit a day. The credential test lists past vectorizations and uses no credits. Recolor SVG and Simplify SVG Colors use no credits; Vectorize Image uses 1 credit and Remove Background uses 2 (1 if given an existing SVG). If you need more credits to test, email contact@svg.new.
 ```
 
 **Does it compete with an n8n paid feature?**
